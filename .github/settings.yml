@@ -1,6 +1,4 @@
 repository:
-  description: PROJECT_DESC
-  homepage: https://REPO_OWNER.github.io/REPO_WO_OWNER_NAME/wiki
   has_wiki: false
 
 labels:
