@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.github/workflows/setup-repo/workflow_setup_repo.iml" filepath="$PROJECT_DIR$/.github/workflows/setup-repo/workflow_setup_repo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bot/JDA-Commands_Bot.bot.main.iml" filepath="$PROJECT_DIR$/.idea/modules/bot/JDA-Commands_Bot.bot.main.iml" />
     </modules>
   </component>
 </project>

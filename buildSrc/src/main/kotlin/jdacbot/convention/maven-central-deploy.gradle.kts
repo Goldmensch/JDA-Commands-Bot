@@ -1,4 +1,4 @@
-package jda-commands bot.convention
+package jdacbot.convention
 
 import gradle.kotlin.dsl.accessors._91ec805279bff2b5bb12917c8cd87938.jreleaser
 import gradle.kotlin.dsl.accessors._91ec805279bff2b5bb12917c8cd87938.jreleaserDeploy

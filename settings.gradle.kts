@@ -4,4 +4,4 @@ plugins {
 }
 
 rootProject.name = "JDA-Commands Bot"
-include("lib")
+include("bot")
