@@ -2,7 +2,7 @@ plugins {
     `kotlin-dsl`
 }
 
-description = "PROJECT_DESC"
+description = "The discord bot for JDA-Commands support server"
 
 repositories {
     mavenCentral()

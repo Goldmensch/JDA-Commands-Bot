@@ -1,3 +1,3 @@
-# PROJECT_NAME
+# JDA-Commands Bot
 
-PROJECT_DESC
+The discord bot for JDA-Commands support server

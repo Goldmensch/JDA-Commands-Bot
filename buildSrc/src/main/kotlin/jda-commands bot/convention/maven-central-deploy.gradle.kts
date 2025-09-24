@@ -1,4 +1,4 @@
-package PROJECT_LOWER_NAME.convention
+package jda-commands bot.convention
 
 import gradle.kotlin.dsl.accessors._91ec805279bff2b5bb12917c8cd87938.jreleaser
 import gradle.kotlin.dsl.accessors._91ec805279bff2b5bb12917c8cd87938.jreleaserDeploy
@@ -21,25 +21,25 @@ publishing {
             pom {
                 name.set(rootProject.name)
                 description.set(project.description)
-                url.set("https://REPO_URL")
+                url.set("https://github.com/Goldmensch/JDA-Commands-Bot")
 
                 licenses {
                     license {
-                        name.set("LICENSE_NAME")
-                        url.set("LICENSE_URL")
+                        name.set("Apache-2.0")
+                        url.set("http://choosealicense.com/licenses/apache-2.0/")
                     }
                 }
 
                 developers {
                     developer {
-                        name.set("AUTHOR_NAME")
+                        name.set("Kaktushose & Goldmensch")
                     }
                 }
 
                 scm {
-                    connection.set("scm:git:git://REPO_URL")
-                    developerConnection.set("scm:git:ssh://REPO_URL")
-                    url.set("https://REPO_URL")
+                    connection.set("scm:git:git://github.com/Goldmensch/JDA-Commands-Bot")
+                    developerConnection.set("scm:git:ssh://github.com/Goldmensch/JDA-Commands-Bot")
+                    url.set("https://github.com/Goldmensch/JDA-Commands-Bot")
                 }
             }
         }
@@ -54,7 +54,7 @@ publishing {
 
 jreleaser {
     project {
-        copyright = "AUTHOR_NAME"
+        copyright = "Kaktushose & Goldmensch"
     }
 
 
