@@ -3,12 +3,9 @@ package dev.goldmensch.jdacbot.webhook;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
-import dev.goldmensch.jdacbot.webhook.pojo.Release;
 import dev.goldmensch.jdacbot.webhook.pojo.ReleasePayload;
 import jakarta.inject.Singleton;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
-import net.dv8tion.jda.api.utils.messages.MessageCreateBuilder;
-import net.dv8tion.jda.api.utils.messages.MessageCreateData;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.HmacAlgorithms;
@@ -105,27 +102,12 @@ public class GhWebhook {
     private void handleRelease(String httpBody) throws IOException {
         ReleasePayload payload = objectMapper.readValue(httpBody, ReleasePayload.class);
         if (!payload.action().equals("published")) return;
-        System.out.println(payload);
 
+        String msg = ReleaseUtil.buildReleaseMessage(payload.release());
         for (TextChannel channel : channels) {
-            Release release = payload.release();
-            String msg = """
-                    # New Release: %s
-                    
-                    %s
-                    
-                    Visit release page [here](%s)
-                    """.formatted(release.name(), release.body(), release.htmlUrl());
-
-            for (int i = 0; i < msg.length(); i += 2000) {
-                String submsg = msg.substring(i, Math.min(i + 2000, msg.length()));
-                MessageCreateData data = new MessageCreateBuilder()
-                        .setContent(submsg)
-                        .setSuppressEmbeds(true)
-                        .build();
-
-                channel.sendMessage(data).queue();
-            }
+            channel.sendMessage(msg)
+                    .setSuppressEmbeds(true)
+                    .queue();
         }
     }
 
