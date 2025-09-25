@@ -11,6 +11,7 @@ repositories {
 dependencies {
     implementation("io.github.kaktushose:jda-commands:4.0.0-beta.8")
     implementation("ch.qos.logback:logback-classic:1.5.6")
+    implementation("commons-codec:commons-codec:1.18.0")
 }
 
 application {

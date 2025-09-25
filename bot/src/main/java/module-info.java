@@ -9,12 +9,13 @@ module dev.goldmensch.jdacbot {
     requires com.google.guice;
     requires org.slf4j;
     requires com.fasterxml.jackson.databind;
+    requires org.apache.commons.codec;
 
     exports dev.goldmensch.jdacbot;
     exports dev.goldmensch.jdacbot.cmd;
-    exports dev.goldmensch.jdacbot.service.webhook;
-    exports dev.goldmensch.jdacbot.service.webhook.pojo;
+    exports dev.goldmensch.jdacbot.webhook;
+    exports dev.goldmensch.jdacbot.webhook.pojo;
 
 
-    opens dev.goldmensch.jdacbot.service.webhook.pojo to com.fasterxml.jackson.databind;
+    opens dev.goldmensch.jdacbot.webhook.pojo to com.fasterxml.jackson.databind;
 }

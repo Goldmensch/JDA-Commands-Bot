@@ -19,6 +19,12 @@
         system,
         ...
       }: let
+        config = {
+          allowUnfree = true;
+        };
+
+        pkgs = import <nixpkgs> { inherit config; };
+
         javaVersion = 24;
 
         jdk = pkgs."temurin-bin-${toString javaVersion}";
@@ -35,7 +41,7 @@
        in {
          devShells.default = pkgs.mkShell {
            name = "JDA-Commands Bot";
-           packages = with pkgs; [git gradle maven] ++ jdks;
+           packages = with pkgs; [git gradle maven ngrok] ++ jdks;
            JDK24 = jdk;
          };
        };

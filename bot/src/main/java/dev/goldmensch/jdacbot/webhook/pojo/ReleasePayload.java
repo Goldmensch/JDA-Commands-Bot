@@ -1,4 +1,4 @@
-package dev.goldmensch.jdacbot.service.webhook.pojo;
+package dev.goldmensch.jdacbot.webhook.pojo;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 

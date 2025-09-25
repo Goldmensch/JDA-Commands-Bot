@@ -4,7 +4,7 @@ import com.github.kaktushose.jda.commands.JDACommands;
 import com.github.kaktushose.jda.commands.guice.GuiceExtensionData;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import dev.goldmensch.jdacbot.service.webhook.GHWebhook;
+import dev.goldmensch.jdacbot.webhook.GhWebhook;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 
@@ -15,7 +15,13 @@ public class Main {
         JDA jda = JDABuilder.createDefault(System.getenv("BOT_TOKEN"))
                 .build();
 
-        GHWebhook hook = GHWebhook.start();
+        GhWebhook hook;
+        try {
+             hook = GhWebhook.start();
+        } catch (Exception e) {
+            jda.shutdown();
+            throw e;
+        }
 
         Injector injector = Guice.createInjector(new JDACBotModule(hook));
 
