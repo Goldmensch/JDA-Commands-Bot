@@ -36,7 +36,7 @@
         gradle = pkgs.gradle.override {
             javaToolchains = jdks;
 
-            java = pkgs.temurin-bin;
+            java = jdk;
         };
        in {
          devShells.default = pkgs.mkShell {

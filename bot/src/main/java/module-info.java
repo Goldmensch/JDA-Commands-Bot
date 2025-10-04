@@ -10,12 +10,18 @@ module dev.goldmensch.jdacbot {
     requires org.slf4j;
     requires com.fasterxml.jackson.databind;
     requires org.apache.commons.codec;
+    requires sadu.sadu.sqlite.main;
+    requires sadu.sadu.datasource.main;
+    requires sadu.sadu.queries.main;
 
     exports dev.goldmensch.jdacbot;
     exports dev.goldmensch.jdacbot.cmd;
     exports dev.goldmensch.jdacbot.webhook;
     exports dev.goldmensch.jdacbot.webhook.pojo;
+    exports dev.goldmensch.jdacbot.data;
 
 
     opens dev.goldmensch.jdacbot.webhook.pojo to com.fasterxml.jackson.databind;
+
+    opens database;
 }

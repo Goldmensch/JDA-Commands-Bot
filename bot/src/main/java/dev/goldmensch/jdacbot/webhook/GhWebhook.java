@@ -3,6 +3,7 @@ package dev.goldmensch.jdacbot.webhook;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
+import dev.goldmensch.jdacbot.data.ConfigRepository;
 import dev.goldmensch.jdacbot.webhook.pojo.ReleasePayload;
 import jakarta.inject.Singleton;
 import net.dv8tion.jda.api.entities.channel.concrete.TextChannel;
@@ -17,25 +18,23 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.security.MessageDigest;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 @Singleton
 public class GhWebhook {
     private final HmacUtils hmacUtil;
 
-    private final Set<TextChannel> channels = ConcurrentHashMap.newKeySet();
-
     private static final Logger log = LoggerFactory.getLogger(GhWebhook.class);
     private final ObjectMapper objectMapper = new ObjectMapper();
+    private final ConfigRepository config;
 
-    public GhWebhook(HmacUtils hmacUtil) {
+    public GhWebhook(HmacUtils hmacUtil, ConfigRepository config) {
         this.hmacUtil = hmacUtil;
+        this.config = config;
     }
 
-    public static GhWebhook start() throws IOException {
+    public static GhWebhook start(ConfigRepository config) throws IOException {
         HttpServer httpServer = HttpServer.create(new InetSocketAddress(getPort()), 0);
-        GhWebhook ghWebhook = new GhWebhook(createHmacUtil());
+        GhWebhook ghWebhook = new GhWebhook(createHmacUtil(), config);
 
         httpServer.createContext("/github", ghWebhook::handle);
         httpServer.start();
@@ -104,7 +103,7 @@ public class GhWebhook {
         if (!payload.action().equals("published")) return;
 
         String msg = ReleaseUtil.buildReleaseMessage(payload.release());
-        for (TextChannel channel : channels) {
+        for (TextChannel channel : config.retrieveReleaseChannels()) {
             channel.sendMessage(msg)
                     .setSuppressEmbeds(true)
                     .queue();
@@ -118,13 +117,5 @@ public class GhWebhook {
         try(OutputStream stream = exchange.getResponseBody()) {
             stream.write(bytes);
         }
-    }
-
-    public void registerChannel(TextChannel channel) {
-        channels.add(channel);
-    }
-
-    public void unregisterChannel(TextChannel channel) {
-        channels.remove(channel);
     }
 }
